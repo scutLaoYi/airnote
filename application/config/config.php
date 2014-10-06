@@ -18,7 +18,7 @@ ini_set("display_errors", 1);
  * Configuration for: Project URL
  * Put your URL here, for local development "127.0.0.1" or "localhost" (plus sub-folder) is fine
  */
-define('URL', 'http://127.0.0.1/php-mvc/');
+define('URL', 'http://127.0.0.1/');
 
 /**
  * Configuration for: Database
@@ -26,6 +26,6 @@ define('URL', 'http://127.0.0.1/php-mvc/');
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'php-mvc');
-define('DB_USER', 'root');
-define('DB_PASS', 'mysql');
+define('DB_NAME', 'airnote');
+define('DB_USER', 'airnote');
+define('DB_PASS', '123456');
