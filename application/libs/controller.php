@@ -68,4 +68,14 @@ class Controller
         $user_input = htmlspecialchars($user_input);
         return $user_input;
     }
+
+    public function raiseInfo($info)
+    {
+        $this->_info_to_show = $info;
+    }
+
+    public function raiseAlert($alert)
+    {
+        $this->_alert_to_show = $alert;
+    }
 }

@@ -48,3 +48,19 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
+
+    <div class="container">
+    <?php
+    if (isset($this->_alert_to_show))
+    {
+    ?>
+        <div class="alert alert-danger" role="alert"><p><?php echo $this->_alert_to_show; ?></p></div>
+        <?php
+    }
+    if (isset($this->_info_to_show)) {
+    ?>
+        <div class="alert alert-success" role="alert"><p><?php echo $this->_info_to_show; ?></p></div>
+        <?php
+    }
+?>
+

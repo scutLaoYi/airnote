@@ -22,14 +22,63 @@ class Tags extends Controller
             $this->new_tag_name = $this->safe_text($_POST['new_tag_name']);
             if($this->tags_model->addTag($this->new_tag_name))
             {
-                $this->success = True;
+                $this->raiseInfo("New tag added.");
             }
             else
             {
-                $this->success = False;
+                $this->raiseAlert("Fuck when adding new tag.");
             }
         }
         $this->render('tags/add.php');
     }
+    public function edit($id=0)
+    {
+        $this->title="edit tag";
+        if (isset($_POST['tag_id'])) {
+            $tag_id = $this->safe_text($_POST['tag_id']);
+            $tag_name = $this->safe_text($_POST['tag_name']);
+
+            $success = False;
+            if(strlen($tag_name) > 0) {
+                if ($this->tags_model->findTagById($tag_id)) {
+                    $success = $this->tags_model->updateTagById($tag_id, $tag_name);
+                }
+            }
+            if (!$success) {
+                $this->raiseAlert("update target tag failed!");
+            }
+            else {
+                $this->raiseInfo("Update target tag success.");
+            }
+            //redirection
+            return $this->index();
+        }
+        else {
+            $id = $this->safe_text($id);
+            $this->current_tag = $this->tags_model->findTagById($id);
+            if (!$this->current_tag) {
+                return $this->index();
+            }
+            $this->render('tags/edit.php');
+        }
+    }
+    public function deleteTag($id=0)
+    {
+        $id = $this->safe_text($id);
+        if ($id === 0 || !$this->tags_model->findTagById($id))
+        {
+            $this->raiseAlert("Tag not found!");
+        }
+        else
+        {
+            if ($this->tags_model->deleteTagById($id)) {
+                $this->raiseInfo("Deleted target tag.");
+            } else {
+                $this->raiseAlert("Failed when delete tag.");
+            }
+        }
+        return $this->index();
+    }
+
 }
 
