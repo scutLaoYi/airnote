@@ -59,4 +59,13 @@ class Controller
         require VIEW_PATH . $view_name;
         require TEMPLATE_PATH . $footer_name;
     }
+
+    public function safe_text($user_input)
+    {
+        
+        $user_input = trim($user_input);
+        $user_input = stripslashes($user_input);
+        $user_input = htmlspecialchars($user_input);
+        return $user_input;
+    }
 }
