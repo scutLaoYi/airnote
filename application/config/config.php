@@ -29,3 +29,14 @@ define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'airnote');
 define('DB_USER', 'airnote');
 define('DB_PASS', '123456');
+
+/**
+  * Some path config
+  */
+
+define('CONTROLLER_PATH', './application/controller/');
+define('VIEW_PATH', './application/views/');
+define('MODEL_PATH', './application/models/');
+define('TEMPLATE_PATH', './application/views/_templates/');
+
+
