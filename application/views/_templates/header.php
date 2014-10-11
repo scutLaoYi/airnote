@@ -32,15 +32,15 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./index.php?page=home">Home</a></li>
-            <li><a href="./index.php?page=note">Note</a></li>
-            <li><a href="./index.php?page=tag">Tag</a></li>
+            <li><a href="/home/index">Home</a></li>
+            <li><a href="/notes/index">Note</a></li>
+            <li><a href="/tags/index">Tag</a></li>
             <li><?php 
             if (isset($username)){
-               echo "<a href=\"./index.php?page=logout\">$username</a>";
+               echo "<a href=\"/user/logout\">$username</a>";
             }
             else{
-               echo "<a href=\"./index.php?page=login\">login</a>";
+               echo "<a href=\"/user/login\">login</a>";
             }
             ?>
             </li>
