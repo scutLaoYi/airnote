@@ -43,6 +43,29 @@ class User extends Controller
         $this->render('home/index.php');
     }
 
+    public function testgoauth()
+    {
+        $secret = TWO_FACTOR_SECRET;
+        $this->loadService('goauth');
+        $ga = new GoAuth();
+
+        if (isset($_POST['secret']))
+        {
+            if ($ga->verifyCode($secret, $_POST['secret'], 2))
+            {
+                $this->raiseInfo('Check success!');
+            }
+            else
+            {
+                $this->raiseAlert('Check failed!');
+            }
+        }
+
+        $this->render('user/testgoauth.php');
+        return;
+
+    }
+
 }
 
 ?>

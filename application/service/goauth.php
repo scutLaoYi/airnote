@@ -9,7 +9,7 @@
  * @link http://www.phpgangsta.de/
  */
 
-class PHPGangsta_GoogleAuthenticator
+class GoAuth
 {
     protected $_codeLength = 6;
 

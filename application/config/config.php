@@ -30,6 +30,8 @@ define('DB_NAME', 'airnote');
 define('DB_USER', 'airnote');
 define('DB_PASS', '123456');
 
+define('TWO_FACTOR_SECRET', "TZ36TEKZJTWLSK7D");
+
 /**
   * Some path config
   */
