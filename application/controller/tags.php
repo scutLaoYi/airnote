@@ -19,7 +19,7 @@ class Tags extends Controller
         $this->title = 'New tag';
         if (isset($_POST['new_tag_name']))
         {
-            $this->new_tag_name = $this->safe_text($_POST['new_tag_name']);
+            $this->new_tag_name = $this->safeText($_POST['new_tag_name']);
             if($this->tags_model->addTag($this->new_tag_name))
             {
                 $this->raiseInfo("New tag added.");
@@ -35,8 +35,8 @@ class Tags extends Controller
     {
         $this->title="edit tag";
         if (isset($_POST['tag_id'])) {
-            $tag_id = $this->safe_text($_POST['tag_id']);
-            $tag_name = $this->safe_text($_POST['tag_name']);
+            $tag_id = $this->safeText($_POST['tag_id']);
+            $tag_name = $this->safeText($_POST['tag_name']);
 
             $success = False;
             if(strlen($tag_name) > 0) {
@@ -54,7 +54,7 @@ class Tags extends Controller
             return $this->index();
         }
         else {
-            $id = $this->safe_text($id);
+            $id = $this->safeText($id);
             $this->current_tag = $this->tags_model->findTagById($id);
             if (!$this->current_tag) {
                 return $this->index();
@@ -64,7 +64,7 @@ class Tags extends Controller
     }
     public function deleteTag($id=0)
     {
-        $id = $this->safe_text($id);
+        $id = $this->safeText($id);
         if ($id === 0 || !$this->tags_model->findTagById($id))
         {
             $this->raiseAlert("Tag not found!");

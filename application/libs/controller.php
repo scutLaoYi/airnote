@@ -17,7 +17,26 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
+        $this->loadSecureSession();
+        $this->loadUserStatus();
     }
+
+    private function loadSecureSession()
+    {
+        require SERVICE_PATH.'sec_session.php';
+        sec_session_start();
+    }
+
+    private function loadUserStatus()
+    {
+        require SERVICE_PATH.'auth.php';
+        $auth = new AuthService($this->db);
+        if ($username = $auth->isLogin())
+        {
+            $this->username = $username;
+        }
+    }
+
 
     /**
      * Open the database connection with the credentials from application/config/config.php
@@ -50,6 +69,12 @@ class Controller
         return new $model_name($this->db);
     }
 
+    public function loadService($service_name)
+    {
+        require_once SERVICE_PATH.strtolower($service_name).'.php';
+        return;
+    }
+
     /**
       * Just a function to render the default web page layout.
       */
@@ -60,7 +85,7 @@ class Controller
         require TEMPLATE_PATH . $footer_name;
     }
 
-    public function safe_text($user_input)
+    public function safeText($user_input)
     {
         
         $user_input = trim($user_input);

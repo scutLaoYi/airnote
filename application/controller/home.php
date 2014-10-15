@@ -19,10 +19,6 @@ class Home extends Controller
         $this->title = 'Home index';
 
         $this->render('home/index.php');
-        // load views. within the views we can echo out $songs and $amount_of_songs easily
-        //require './application/views/_templates/header.php';
-        //require './application/views/home/index.php';
-        //require './application/views/_templates/footer.php';
     }
 
     /**

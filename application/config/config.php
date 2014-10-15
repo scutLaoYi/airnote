@@ -38,5 +38,6 @@ define('CONTROLLER_PATH', './application/controller/');
 define('VIEW_PATH', './application/views/');
 define('MODEL_PATH', './application/models/');
 define('TEMPLATE_PATH', './application/views/_templates/');
+define('SERVICE_PATH', './application/service/');
 
 

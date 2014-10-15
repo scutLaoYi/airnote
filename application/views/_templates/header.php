@@ -36,8 +36,8 @@
             <li><a href="/notes/index">Note</a></li>
             <li><a href="/tags/index">Tag</a></li>
             <li><?php 
-            if (isset($username)){
-               echo "<a href=\"/user/logout\">$username</a>";
+            if (isset($this->username)){
+               echo "<a href=\"/user/logout\">$this->username</a>";
             }
             else{
                echo "<a href=\"/user/login\">login</a>";
