@@ -16,6 +16,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="<?php echo URL;?>public/js/ie-emulation-modes-warning.js"></script>
+    <script src="<?php echo URL;?>public/js/bootstrap.min.js"></script>
 
 </head>
 <body>
