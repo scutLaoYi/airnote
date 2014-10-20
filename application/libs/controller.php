@@ -23,13 +23,13 @@ class Controller
 
     private function loadSecureSession()
     {
-        require SERVICE_PATH.'sec_session.php';
+        require_once SERVICE_PATH.'sec_session.php';
         sec_session_start();
     }
 
     private function loadUserStatus()
     {
-        require SERVICE_PATH.'auth.php';
+        require_once SERVICE_PATH.'auth.php';
         $auth = new AuthService($this->db);
         if ($username = $auth->isLogin())
         {
@@ -64,7 +64,7 @@ class Controller
      */
     public function loadModel($model_name)
     {
-        require MODEL_PATH . strtolower($model_name) . '.php';
+        require_once MODEL_PATH . strtolower($model_name) . '.php';
         // return new model (and pass the database connection to the model)
         return new $model_name($this->db);
     }
@@ -80,9 +80,9 @@ class Controller
       */
     public function render($view_name, $header_name = 'header.php', $footer_name = 'footer.php')
     {
-        require TEMPLATE_PATH . $header_name;
-        require VIEW_PATH . $view_name;
-        require TEMPLATE_PATH . $footer_name;
+        require_once TEMPLATE_PATH . $header_name;
+        require_once VIEW_PATH . $view_name;
+        require_once TEMPLATE_PATH . $footer_name;
     }
 
     public function safeText($user_input)

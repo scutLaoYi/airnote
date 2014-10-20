@@ -31,7 +31,7 @@ class Application
 
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
-            require CONTROLLER_PATH. $this->url_controller . '.php';
+            require_once CONTROLLER_PATH. $this->url_controller . '.php';
             $this->url_controller = new $this->url_controller();
 
             // check for method: does such a method exist in the controller ?
@@ -57,7 +57,7 @@ class Application
             }
         } else {
             // invalid URL, so simply show home/index
-            require CONTROLLER_PATH . 'home.php';
+            require_once CONTROLLER_PATH . 'home.php';
             $home = new Home();
             $home->index();
         }
