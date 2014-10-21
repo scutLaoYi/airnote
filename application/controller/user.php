@@ -3,10 +3,19 @@
 class User extends Controller
 {
 
+    public static function accessRules()
+    {
+       return array(
+              ALLOW_FROM_ALL => array('login','logout'),
+              ALLOW_FROM_LOGIN => array('logout'),
+              );
+    }
+
     function __construct()
     {
         parent::__construct();
         $this->loadService('auth');
+        $this->loadService('goauth');
         $this->auth = new AuthService($this->db);
     }
 
@@ -25,7 +34,8 @@ class User extends Controller
         {
             $username = $this->safeText($_POST['username']);
             $password = $this->safeText($_POST['password']);
-            if($this->auth->login($username, $password))
+            $twoFa = $this->safeText($_POST['two_fa_code']);
+            if($this->auth->login($username, $password, $twoFa))
             {
                 $this->render('home/index.php');
                 return;

@@ -12,12 +12,16 @@ class AuthService
         }
     }
 
-    public function login($username, $password) 
+    public function login($username, $password, $twoFa) 
     {
         if ($username === $password)
         {
-            $this->recordUserInfo($username);
-            return True;
+            $goauthClient = new GoAuth();
+            if ($goauthClient->verifyCode(TWO_FACTOR_SECRET, $twoFa))
+            {
+                $this->recordUserInfo($username);
+                return True;
+            }
         }
         return False;
     }

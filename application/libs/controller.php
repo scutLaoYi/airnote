@@ -13,7 +13,7 @@ class Controller
     public static function accessRules()
     {
        return array(
-              ALLOW_FROM_ALL => array('index',),
+              ALLOW_FROM_ALL => array(),
               ALLOW_FROM_LOGIN => array(),
               );
     }

@@ -107,7 +107,8 @@ class Application
         }
         else if(in_array($action, $permissionList[ALLOW_FROM_LOGIN]))
         {
-            if (Auth::isLogin())
+            require_once SERVICE_PATH.'auth.php';
+            if (AuthService::isLogin())
             {
                 return True;
             }
