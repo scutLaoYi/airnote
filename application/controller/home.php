@@ -10,6 +10,15 @@
  */
 class Home extends Controller
 {
+
+    public static function accessRules()
+    {
+       return array(
+              ALLOW_FROM_ALL => array('index',),
+              ALLOW_FROM_LOGIN => array(),
+              );
+    }
+
     /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)

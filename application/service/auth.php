@@ -22,7 +22,7 @@ class AuthService
         return False;
     }
 
-    public function isLogin()
+    static public function isLogin()
     {
         if (isset($_SESSION['username']) &&
             isset($_SESSION['useragent']) && 

@@ -10,6 +10,14 @@ class Controller
      */
     public $db = null;
 
+    public static function accessRules()
+    {
+       return array(
+              ALLOW_FROM_ALL => array('index',),
+              ALLOW_FROM_LOGIN => array(),
+              );
+    }
+
     /**
      * Whenever a controller is created, open a database connection too. The idea behind is to have ONE connection
      * that can be used by multiple models (there are frameworks that open one connection per model).

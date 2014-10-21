@@ -32,35 +32,22 @@ class Application
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require_once CONTROLLER_PATH. $this->url_controller . '.php';
-            $this->url_controller = new $this->url_controller();
 
             // check for method: does such a method exist in the controller ?
             if (method_exists($this->url_controller, $this->url_action)) {
-
-                // call the method and pass the arguments to it
-                if (isset($this->url_parameter_3)) {
-                    // will translate to something like $this->home->method($param_1, $param_2, $param_3);
-                    $this->url_controller->{$this->url_action}($this->url_parameter_1, $this->url_parameter_2, $this->url_parameter_3);
-                } elseif (isset($this->url_parameter_2)) {
-                    // will translate to something like $this->home->method($param_1, $param_2);
-                    $this->url_controller->{$this->url_action}($this->url_parameter_1, $this->url_parameter_2);
-                } elseif (isset($this->url_parameter_1)) {
-                    // will translate to something like $this->home->method($param_1);
-                    $this->url_controller->{$this->url_action}($this->url_parameter_1);
-                } else {
-                    // if no parameters given, just call the method without parameters, like $this->home->method();
-                    $this->url_controller->{$this->url_action}();
+                if ($this->permissionCheck($this->url_controller, $this->url_action))
+                {
+                    $this->url_controller = new $this->url_controller();
+                    $this->routeControllerAndAction();
+                    return;
                 }
-            } else {
-                // default/fallback: call the index() method of a selected controller
-                $this->url_controller->index();
-            }
-        } else {
-            // invalid URL, so simply show home/index
-            require_once CONTROLLER_PATH . 'home.php';
-            $home = new Home();
-            $home->index();
-        }
+            } 
+        } 
+
+        // invalid URL or permission deny, so simply show home/index
+        require_once CONTROLLER_PATH . 'home.php';
+        $home = new Home();
+        $home->index();
     }
 
     /**
@@ -91,5 +78,40 @@ class Application
             // echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
             // echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
         }
+    }
+
+    private function routeControllerAndAction()
+    {
+        // call the method and pass the arguments to it
+        if (isset($this->url_parameter_3)) {
+            // will translate to something like $this->home->method($param_1, $param_2, $param_3);
+            $this->url_controller->{$this->url_action}($this->url_parameter_1, $this->url_parameter_2, $this->url_parameter_3);
+        } elseif (isset($this->url_parameter_2)) {
+            // will translate to something like $this->home->method($param_1, $param_2);
+            $this->url_controller->{$this->url_action}($this->url_parameter_1, $this->url_parameter_2);
+        } elseif (isset($this->url_parameter_1)) {
+            // will translate to something like $this->home->method($param_1);
+            $this->url_controller->{$this->url_action}($this->url_parameter_1);
+        } else {
+            // if no parameters given, just call the method without parameters, like $this->home->method();
+            $this->url_controller->{$this->url_action}();
+        }
+    }
+
+    private function permissionCheck($controller, $action)
+    {
+        $permissionList = $controller::accessRules();
+        if (in_array($action, $permissionList[ALLOW_FROM_ALL]))
+        {
+            return True;
+        }
+        else if(in_array($action, $permissionList[ALLOW_FROM_LOGIN]))
+        {
+            if (Auth::isLogin())
+            {
+                return True;
+            }
+        }
+        return False;
     }
 }

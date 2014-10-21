@@ -43,3 +43,5 @@ define('TEMPLATE_PATH', './application/views/_templates/');
 define('SERVICE_PATH', './application/service/');
 
 
+define('ALLOW_FROM_ALL', 0);
+define("ALLOW_FROM_LOGIN", 1);
