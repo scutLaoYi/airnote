@@ -26,6 +26,8 @@ class Application
         // create array with URL parts in $url
         $this->splitUrl();
 
+        $this->loadSecureSession();
+
         // check for controller: does such a controller exist ?
         if (file_exists(CONTROLLER_PATH . $this->url_controller . '.php')) {
 
@@ -45,10 +47,17 @@ class Application
         } 
 
         // invalid URL or permission deny, so simply show home/index
+        $this->jumpToHomePage();
+    }
+
+    private function jumpToHomePage()
+    {
+        header("LOCATION: ".URL."home/index");
         require_once CONTROLLER_PATH . 'home.php';
         $home = new Home();
         $home->index();
     }
+
 
     /**
      * Get and split the URL
@@ -97,6 +106,13 @@ class Application
             $this->url_controller->{$this->url_action}();
         }
     }
+
+    private function loadSecureSession()
+    {
+        require_once SERVICE_PATH.'sec_session.php';
+        sec_session_start();
+    }
+
 
     private function permissionCheck($controller, $action)
     {

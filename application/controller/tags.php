@@ -2,6 +2,14 @@
 
 class Tags extends Controller
 {
+    public static function accessRules()
+    {
+       return array(
+              ALLOW_FROM_ALL => array(),
+              ALLOW_FROM_LOGIN => array('index', 'add', 'edit', 'deleteTag'),
+              );
+    }
+
     function __construct()
     {
         parent::__construct();

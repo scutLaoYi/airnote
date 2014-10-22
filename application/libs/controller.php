@@ -25,21 +25,13 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
-        $this->loadSecureSession();
         $this->loadUserStatus();
-    }
-
-    private function loadSecureSession()
-    {
-        require_once SERVICE_PATH.'sec_session.php';
-        sec_session_start();
     }
 
     private function loadUserStatus()
     {
         require_once SERVICE_PATH.'auth.php';
-        $auth = new AuthService($this->db);
-        if ($username = $auth->isLogin())
+        if ($username = AuthService::isLogin())
         {
             $this->username = $username;
         }
