@@ -14,7 +14,8 @@ class AuthService
 
     public function login($username, $password, $twoFa) 
     {
-        if ($username === $password)
+        if ($username === SINGLE_USERNAME &&
+                $password === SINGLE_PASSWORD)
         {
             $goauthClient = new GoAuth();
             if ($goauthClient->verifyCode(TWO_FACTOR_SECRET, $twoFa))

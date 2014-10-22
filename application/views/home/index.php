@@ -1,5 +1,5 @@
 <div class="container"> 
     <div class="starter-template">
-        <?php echo URL;?>
+        Yep. This is my online notebook.
     </div>
 </div>

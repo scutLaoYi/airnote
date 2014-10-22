@@ -21,6 +21,13 @@ ini_set("display_errors", 1);
 define('URL', 'http://127.0.0.1:9999/');
 
 /**
+  * Single user
+  */
+define('SINGLE_USERNAME', 'develop');
+define('SINGLE_PASSWORD', 'develop');
+
+
+/**
  * Configuration for: Database
  * This is the place where you define your database credentials, database type etc.
  */
@@ -43,5 +50,8 @@ define('TEMPLATE_PATH', './application/views/_templates/');
 define('SERVICE_PATH', './application/service/');
 
 
+/*
+ * Page access control.
+ */
 define('ALLOW_FROM_ALL', 0);
 define("ALLOW_FROM_LOGIN", 1);
