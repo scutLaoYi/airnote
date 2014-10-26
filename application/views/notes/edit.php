@@ -7,8 +7,7 @@
     <label for="form_title">title:</label>
     <input type="text" class="form-control" id="form_title" name="title" value="<?php echo $this->current_note->title;?>">
     <label for="form_content">content:</label>
-    <textarea class="form-control" id="form_content" name="content" ><?php echo $this->current_note->content;?>
-    </textarea>
+    <textarea class="form-control" id="form_content" name="content" rows="9" ><?php echo $this->current_note->content;?></textarea>
     <label for="form_tag_select">tag:</label>
     <select class="form-control" name="tag_id">
     <?php 
