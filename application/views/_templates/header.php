@@ -7,16 +7,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo URL; ?>public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/starter-template/starter-template.css" rel="stylesheet">
+    <link href="<?php echo URL;?>public/css/template.css" rel="stylesheet" type="text/css">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="<?php echo URL;?>public/js/ie-emulation-modes-warning.js"></script>
-    <script src="<?php echo URL;?>public/js/bootstrap.min.js"></script>
 
 </head>
 <body>
