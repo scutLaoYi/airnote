@@ -2,7 +2,14 @@
 
 My online notebook project.
 
-Base on a funny mvc framework for php: https://github.com/panique/php-mvc
+## Base libraries
+
+* a funny mvc framework for php: https://github.com/panique/php-mvc
+* a google authenticator class in php: https://github.com/PHPGangsta/GoogleAuthenticator
+
+## Third Party service
+
+* notification for your server's alert: http://tonggao.baidu.com
 
 ## Goals for this project
 
