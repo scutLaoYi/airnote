@@ -42,10 +42,24 @@ class User extends Controller
             }
             $this->auth->recordFailedLogin($user_ip);
             $this->raiseAlert('Login failed! Retry!');
+            $this->sendLoginAttemptAlert($username, $password, $twoFa);
         }
         $this->render('user/login.php');
         return;
     }
+
+    private function sendLoginAttemptAlert(
+                                            $username,
+                                            $password,
+                                            $twoFa
+                                    )
+    {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $message = "Warning: Someone try to login but failed!Ip:$ip|username:$username|password:$password|twoFa:$twoFa";
+        require_once COMMON_PATH."NoticeHelper.php";
+        NoticeHelper::sendAlert($message);
+    }
+
 
     public function logout()
     {

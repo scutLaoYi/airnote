@@ -29,4 +29,5 @@ class Home extends Controller
 
         $this->render('home/index.php');
     }
+
 }
