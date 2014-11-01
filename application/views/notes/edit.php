@@ -23,7 +23,7 @@
 ?>
     </select>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button> 
+    <button type="submit" class="btn btn-default">Save</button> 
 </form>
 <form role="form" name="delete" action="/notes/delete/<?php echo $this->current_note->id; ?>" method="POST">
     <div class="form-group"></div>

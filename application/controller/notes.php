@@ -77,17 +77,13 @@ class Notes extends Controller
             else {
                 $this->raiseInfo("Update target note success.");
             }
-            //redirection
+        }
+        $id = intval($id);
+        $this->current_note = $this->notesModel->findById($id);
+        if (!$this->current_note) {
             return $this->index();
         }
-        else {
-            $id = intval($id);
-            $this->current_note = $this->notesModel->findById($id);
-            if (!$this->current_note) {
-                return $this->index();
-            }
-            $this->render('notes/edit.php');
-        }
+        $this->render('notes/edit.php');
     }
     public function delete($id=0)
     {
