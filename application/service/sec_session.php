@@ -11,6 +11,8 @@ function sec_session_start()
     }
 
     $cookieParams = session_get_cookie_params();
+    //extend the session timeout for convenience. 
+    $cookieParams['lifetime'] = 5400;
     session_set_cookie_params(
             $cookieParams['lifetime'],
             $cookieParams['path'],
