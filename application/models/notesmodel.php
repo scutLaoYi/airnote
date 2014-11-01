@@ -13,7 +13,7 @@ class NotesModel
 
     public function findAll()
     {
-        $sql = "SELECT * FROM note";
+        $sql = "SELECT * FROM note ORDER BY id DESC";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -35,7 +35,7 @@ class NotesModel
 
     public function findById($id)
     {
-        $sql = "SELECT * FROM note WHERE id=".$id." LIMIT 1";
+        $sql = "SELECT * FROM note WHERE id=$id LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetch();
@@ -43,7 +43,7 @@ class NotesModel
 
     public function findByTagId($tag_id)
     {
-        $sql = "SELECT * FROM note WHERE tag_id=\"$tag_id\" ";
+        $sql = "SELECT * FROM note WHERE tag_id=\"$tag_id\" ORDER BY id DESC";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -66,7 +66,7 @@ class NotesModel
         if (!$this->findById($id)) {
             return False;
         }
-        $sql = "DELETE FROM note WHERE id=".$id.";";
+        $sql = "DELETE FROM note WHERE id=$id;";
         $query = $this->db->prepare($sql);
         try {
             $query->execute();
