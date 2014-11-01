@@ -18,7 +18,7 @@
                 <a href="/notes/edit/<?php echo $note->id?>"><h4><?php echo $note->title;?></h4></a>
             </div>
             <div class="panel-body">
-                <?php echo $note->content;?>
+                <p><?php echo nl2br($note->content);?></p>
             </div>
         </div>
         <?php } ?>
