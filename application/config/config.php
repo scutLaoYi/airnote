@@ -48,6 +48,7 @@ define('VIEW_PATH', './application/views/');
 define('MODEL_PATH', './application/models/');
 define('TEMPLATE_PATH', './application/views/_templates/');
 define('SERVICE_PATH', './application/service/');
+define('COMMON_PATH', './application/common/');
 
 
 /*
@@ -55,3 +56,9 @@ define('SERVICE_PATH', './application/service/');
  */
 define('ALLOW_FROM_ALL', 0);
 define("ALLOW_FROM_LOGIN", 1);
+
+/*
+ * config for tonggao.baidu.com
+ */
+define('BELLRINGER_SERVICE_ID', '123');
+define('BELLRINGER_SERVICE_KEY', 'qaqaqaqa');
