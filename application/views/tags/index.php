@@ -1,6 +1,3 @@
-<div class="well well-lg">
-<h2>All tags</h2>
-</div>
 <div class="list-group">
     <form role="form" name="new" action="/tags/add" method="POST">
         <div class="form-group"></div>

@@ -1,6 +1,3 @@
-<div class="well well-lg">
-    <h2>User login</h2>
-</div>
 <form role="form" name="input" action="/user/login" method="POST">
     <div class="form-group">
     <label for="input_text">Username:</label>

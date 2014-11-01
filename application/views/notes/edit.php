@@ -1,14 +1,12 @@
-<div class="well well-lg">
-    <h2>View and edit a note</h2>
-</div>
 <form role="form" name="input" action="/notes/edit" method="POST">
-    <div class="form-group">
     <input type="hidden" name="id" value="<?php echo $this->current_note->id;?>">
-    <label for="form_title">title:</label>
+
+    <div class="input-group">
+    <span class="input-group-addon">title</span>
     <input type="text" class="form-control" id="form_title" name="title" value="<?php echo $this->current_note->title;?>">
-    <label for="form_content">content:</label>
-    <textarea class="form-control" id="form_content" name="content" rows="9" ><?php echo $this->current_note->content;?></textarea>
-    <label for="form_tag_select">tag:</label>
+    </div>
+
+    <br/>
     <select class="form-control" name="tag_id">
     <?php 
     foreach ($this->tags as $tag){
@@ -22,7 +20,10 @@
     }
 ?>
     </select>
-    </div>
+    <br/>
+    <textarea class="form-control" id="form_content" name="content" rows="9" ><?php echo $this->current_note->content;?></textarea>
+    <br/>
+
     <button type="submit" class="btn btn-default">Save</button> 
 </form>
 <form role="form" name="delete" action="/notes/delete/<?php echo $this->current_note->id; ?>" method="POST">
