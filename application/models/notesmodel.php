@@ -21,6 +21,12 @@ class NotesModel
 
     public function add($title, $content, $tag_id)
     {
+        if (strlen($title) == 0 || 
+                strlen($content) == 0)
+        {
+            return False;
+        }
+                
         $sql = "INSERT INTO note (title, content, tag_id) value (\"$title\", \"$content\", \"$tag_id\");";
         $query = $this->db->prepare($sql);
         try {
