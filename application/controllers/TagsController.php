@@ -1,6 +1,6 @@
 <?php
 
-class Tags extends Controller
+class TagsController extends Controller
 {
     public static function accessRules()
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Notes extends Controller
+class NotesController extends Controller
 {
     public static function accessRules()
     {

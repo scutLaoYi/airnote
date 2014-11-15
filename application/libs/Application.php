@@ -32,11 +32,9 @@ class Application
         if (file_exists(CONTROLLER_PATH . $this->url_controller . '.php')) {
 
             // if so, then load this file and create this controller
-            // example: if controller would be "car", then this line would translate into: $this->car = new car();
-            require_once CONTROLLER_PATH. $this->url_controller . '.php';
-
             // check for method: does such a method exist in the controller ?
             if (method_exists($this->url_controller, $this->url_action)) {
+                // if the current visiter has the permission to load this page
                 if ($this->permissionCheck($this->url_controller, $this->url_action))
                 {
                     $this->url_controller = new $this->url_controller();
@@ -53,8 +51,7 @@ class Application
     private function jumpToHomePage()
     {
         header("LOCATION: ".URL."home/index");
-        require_once CONTROLLER_PATH . 'home.php';
-        $home = new Home();
+        $home = new HomeController();
         $home->index();
     }
 
@@ -75,17 +72,11 @@ class Application
             // By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
             // @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
             $this->url_controller = (isset($url[0]) ? $url[0] : null);
+            $this->url_controller = ucfirst($this->url_controller) . 'Controller';
             $this->url_action = (isset($url[1]) ? $url[1] : null);
             $this->url_parameter_1 = (isset($url[2]) ? $url[2] : null);
             $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
             $this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
-
-            // for debugging. uncomment this if you have problems with the URL
-            // echo 'Controller: ' . $this->url_controller . '<br />';
-            // echo 'Action: ' . $this->url_action . '<br />';
-            // echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
-            // echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
-            // echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
         }
     }
 

@@ -43,6 +43,7 @@ define('TWO_FACTOR_SECRET', "TZ36TEKZJTWLSK7D");
   * Some path config
   */
 
+define('LIB_PATH', './application/libs/');
 define('CONTROLLER_PATH', './application/controllers/');
 define('VIEW_PATH', './application/views/');
 define('MODEL_PATH', './application/models/');
