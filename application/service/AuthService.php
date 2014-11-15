@@ -17,7 +17,7 @@ class AuthService
         if ($username === SINGLE_USERNAME &&
                 $password === SINGLE_PASSWORD)
         {
-            $goauthClient = new GoAuth();
+            $goauthClient = new GoAuthHelper();
             if ($goauthClient->verifyCode(TWO_FACTOR_SECRET, $twoFa))
             {
                 $this->recordUserInfo($username);

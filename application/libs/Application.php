@@ -100,8 +100,7 @@ class Application
 
     private function loadSecureSession()
     {
-        require_once SERVICE_PATH.'sec_session.php';
-        sec_session_start();
+        SecureSessionService::sec_session_start();
     }
 
 
@@ -114,7 +113,6 @@ class Application
         }
         else if(in_array($action, $permissionList[ALLOW_FROM_LOGIN]))
         {
-            require_once SERVICE_PATH.'auth.php';
             if (AuthService::isLogin())
             {
                 return True;

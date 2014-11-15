@@ -14,8 +14,6 @@ class UserController extends Controller
     function __construct()
     {
         parent::__construct();
-        $this->loadService('auth');
-        $this->loadService('goauth');
         $this->auth = new AuthService($this->db);
     }
 

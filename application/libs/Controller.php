@@ -30,7 +30,6 @@ class Controller
 
     private function loadUserStatus()
     {
-        require_once SERVICE_PATH.'auth.php';
         if ($username = AuthService::isLogin())
         {
             $this->username = $username;

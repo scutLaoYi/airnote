@@ -9,7 +9,7 @@
  * @link http://www.phpgangsta.de/
  */
 
-class GoAuth
+class GoAuthHelper
 {
     protected $_codeLength = 6;
 
