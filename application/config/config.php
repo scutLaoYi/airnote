@@ -49,6 +49,7 @@ define('MODEL_PATH', './application/models/');
 define('TEMPLATE_PATH', './application/views/_templates/');
 define('SERVICE_PATH', './application/service/');
 define('COMMON_PATH', './application/common/');
+define('COMPONENT_PATH', './application/component/');
 
 
 /*
