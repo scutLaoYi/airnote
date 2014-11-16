@@ -10,15 +10,10 @@ class TagsController extends Controller
               );
     }
 
-    function __construct()
-    {
-        parent::__construct();
-        $this->tags_model = $this->loadModel('TagsModel');
-    }
     public function index()
     {
         $this->title = 'Tags';
-        $this->tags = $this->tags_model->findAll();
+        $this->tags = Tag::findAll();
         $this->render('tags/index.php');
     }
     
@@ -28,7 +23,7 @@ class TagsController extends Controller
         if (isset($_POST['new_tag_name']))
         {
             $this->new_tag_name = $this->safeText($_POST['new_tag_name']);
-            if($this->tags_model->addTag($this->new_tag_name))
+            if(Tag::addTag($this->new_tag_name))
             {
                 $this->raiseInfo("New tag added.");
             }
@@ -48,8 +43,8 @@ class TagsController extends Controller
 
             $success = False;
             if(strlen($tag_name) > 0) {
-                if ($this->tags_model->findTagById($tag_id)) {
-                    $success = $this->tags_model->updateTagById($tag_id, $tag_name);
+                if (Tag::findTagById($tag_id)) {
+                    $success = Tag::updateTagById($tag_id, $tag_name);
                 }
             }
             if (!$success) {
@@ -63,7 +58,7 @@ class TagsController extends Controller
         }
         else {
             $id = $this->safeText($id);
-            $this->current_tag = $this->tags_model->findTagById($id);
+            $this->current_tag = Tag::findTagById($id);
             if (!$this->current_tag) {
                 return $this->index();
             }
@@ -73,13 +68,13 @@ class TagsController extends Controller
     public function deleteTag($id=0)
     {
         $id = $this->safeText($id);
-        if ($id === 0 || !$this->tags_model->findTagById($id))
+        if ($id === 0 || !Tag::findTagById($id))
         {
             $this->raiseAlert("Tag not found!");
         }
         else
         {
-            if ($this->tags_model->deleteTagById($id)) {
+            if (Tag::deleteTagById($id)) {
                 $this->raiseInfo("Deleted target tag.");
             } else {
                 $this->raiseAlert("Failed when delete tag.");

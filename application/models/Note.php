@@ -1,25 +1,16 @@
 <?php 
 
-class NotesModel
+class Note extends Model
 {
-    function __construct($db) {
-        try {
-            $this->db = $db;
-        }
-        catch (PDOException $e) {
-            exit('Database connection failed in notes model.');
-        }
-    }
-
-    public function findAll()
+    public static function findAll()
     {
         $sql = "SELECT * FROM note ORDER BY id DESC";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function add($title, $content, $tag_id)
+    public static function add($title, $content, $tag_id)
     {
         if (strlen($title) == 0 || 
                 strlen($content) == 0)
@@ -28,58 +19,58 @@ class NotesModel
         }
                 
         $sql = "INSERT INTO note (title, content, tag_id) value (\"$title\", \"$content\", \"$tag_id\");";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         }
         catch (PDOException $e) {
-            exit('Creating new note failed!');
+            throw new Exception("Error occur when creating note, db failed info: ".$e->getMessage());
+            return False;
         }
-        return False;
     }
 
-    public function findById($id)
+    public static function findById($id)
     {
         $sql = "SELECT * FROM note WHERE id=$id LIMIT 1";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         $query->execute();
         return $query->fetch();
     }
 
-    public function findByTagId($tag_id)
+    public static function findByTagId($tag_id)
     {
         $sql = "SELECT * FROM note WHERE tag_id=\"$tag_id\" ORDER BY id DESC";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
     
-    public function updateById($id, $title, $content, $tag_id)
+    public static function updateById($id, $title, $content, $tag_id)
     {
         $sql = "UPDATE note SET title=\"$title\", content=\"$content\", tag_id=\"$tag_id\" WHERE id=".$id.";";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         } catch (PDOException $e) {
-            exit('Failed when try to update note.');
+            throw new Exception("Error occur when update note $id, db failed info: ".$e->getMessage());
         }
     }
 
-    public function deleteById($id)
+    public static function deleteById($id)
     {
-        if (!$this->findById($id)) {
+        if (!self::findById($id)) {
             return False;
         }
         $sql = "DELETE FROM note WHERE id=$id;";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         }
         catch (PDOException $e) {
-            exit('Failed when delete the note.');
+            throw new Exception("Error occur when delete note $id, db failed info: ".$e->getMessage());
         }
     }
 }

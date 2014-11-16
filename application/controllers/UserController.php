@@ -11,18 +11,12 @@ class UserController extends Controller
               );
     }
 
-    function __construct()
-    {
-        parent::__construct();
-        $this->auth = new AuthService($this->db);
-    }
-
     public function login()
     {
         $this->title="Login";
         $user_ip = $_SERVER['REMOTE_ADDR'];
 
-        if(!$this->auth->checkbrute($user_ip))
+        if(!AuthService::checkbrute($user_ip))
         {
             echo 'fuck you';
             exit();
@@ -33,12 +27,12 @@ class UserController extends Controller
             $username = $this->safeText($_POST['username']);
             $password = $this->safeText($_POST['password']);
             $twoFa = $this->safeText($_POST['two_fa_code']);
-            if($this->auth->login($username, $password, $twoFa))
+            if(AuthService::login($username, $password, $twoFa))
             {
                 $this->render('home/index.php');
                 return;
             }
-            $this->auth->recordFailedLogin($user_ip);
+            AuthService::recordFailedLogin($user_ip);
             $this->raiseAlert('Login failed! Retry!');
             $this->sendLoginAttemptAlert($username, $password, $twoFa);
         }
@@ -54,14 +48,13 @@ class UserController extends Controller
     {
         $ip = $_SERVER['REMOTE_ADDR'];
         $message = "Warning: Someone try to login but failed!Ip:$ip|username:$username|password:$password|twoFa:$twoFa";
-        require_once COMMON_PATH."NoticeHelper.php";
         NoticeHelper::sendAlert($message);
     }
 
 
     public function logout()
     {
-        $this->auth->logout();
+        AuthService::logout();
         $this->render('home/index.php');
     }
 

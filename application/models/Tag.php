@@ -1,71 +1,61 @@
 <?php 
 
-class TagsModel
+class Tag extends Model
 {
-    function __construct($db) {
-        try {
-            $this->db = $db;
-        }
-        catch (PDOException $e) {
-            exit('Database connection failed in tags model.');
-        }
-    }
-
-    public function findAll()
+    public static function findAll()
     {
         $sql = "SELECT * FROM tag";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function addTag($tag_name)
+    public static function addTag($tag_name)
     {
         $sql = "INSERT INTO tag (name) value (\"".$tag_name."\");";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         }
         catch (PDOException $e) {
-            exit('Creating new tag failed!');
+            throw new Exception("Error occur when creating tag, db failed info: ".$e->getMessage());
         }
-        return False;
     }
 
-    public function findTagById($id)
+    public static function findTagById($id)
     {
         $sql = "SELECT * FROM tag WHERE id=".$id." LIMIT 1";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         $query->execute();
         return $query->fetch();
     }
     
-    public function updateTagById($id, $name)
+    public static function updateTagById($id, $name)
     {
         $sql = "UPDATE tag SET name=\"".$name."\" WHERE id=".$id.";";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         } catch (PDOException $e) {
-            exit('Failed when try to update tag.');
+            throw new Exception("Error occur when updating tag $id, db failed info: ".$e->getMessage());
         }
     }
 
-    public function deleteTagById($id)
+    public static function deleteTagById($id)
     {
-        if (!$this->findTagById($id)) {
+        if (!self::findTagById($id)) {
             return False;
         }
         $sql = "DELETE FROM tag WHERE id=".$id.";";
-        $query = $this->db->prepare($sql);
+        $query = self::getDbConnection()->prepare($sql);
         try {
             $query->execute();
             return True;
         }
         catch (PDOException $e) {
-            exit('Failed when delete the tag.');
+            throw new Exception("Error occur when deleting tag $id, db failed info: ".$e->getMessage());
         }
     }
 }
