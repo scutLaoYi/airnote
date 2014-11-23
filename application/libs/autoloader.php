@@ -1,6 +1,6 @@
 <?php
 
-function __autoload($className)
+function appLoader($className)
 {
     $hasLoaded = False;
     $loadFromDir = function ($path) use ($className, &$hasLoaded) {
@@ -22,10 +22,8 @@ function __autoload($className)
             COMPONENT_PATH,
             );
     array_walk($pathArray, $loadFromDir);
-
-    if (!$hasLoaded) {
-        throw new Exception("Unable to load the class $className");
-    }
 }
+
+spl_autoload_register('appLoader');
 
 

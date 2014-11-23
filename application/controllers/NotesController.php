@@ -25,6 +25,12 @@ class NotesController extends Controller
             $this->notes = Note::findAll();
         }
         $this->tags = Tag::findAll();
+
+        //Markdown them!
+        foreach ($this->notes as $note) {
+             MarkdownHelper::transformFromPlainText($note->content);
+        }
+
         $this->current_tag = $current_tag;
         $this->render('notes/index.php');
     }
